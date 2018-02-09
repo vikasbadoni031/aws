@@ -1,0 +1,6 @@
+for file in $(/usr/bin/aws --profile=saml s3 ls s3://bucket-name/format=vikas/ | sort -k 2.13 | awk '{print "string"$2}');do /usr/bin/aws --profile=saml sqs send-message --queue-url  https://sqs.us-east-1.amazonaws.com/vikas.fifo --message-body "$file" --message-group-id=102; done
+
+
+folder staructure:  updatehour=1970010100
+
+This script sorts the files in s3 based on the date format above and sends them to sqs
